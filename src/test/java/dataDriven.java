@@ -24,15 +24,20 @@ public class dataDriven {
                 Row firstRow = rows.next();
                 //get specific cell
                 Iterator<Cell> getCell = firstRow.cellIterator();
+                int colPosition = 0;
+                int columnIndex = 0;
+
                 while(getCell.hasNext()) //checks if cell has next but won't move
                 {
                     Cell value = getCell.next(); //use .next() to move to cell
-                    if(value.getStringCellValue().equalsIgnoreCase("testcases"));
+                    if(value.getStringCellValue().equalsIgnoreCase("data3"));
                     {
                         //action retrieve data
+                        columnIndex = colPosition;
                     }
-
+                    colPosition++;
                 }
+                System.out.println(columnIndex);
             }
         }
     }
