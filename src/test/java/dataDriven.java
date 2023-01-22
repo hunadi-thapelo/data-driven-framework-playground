@@ -15,10 +15,13 @@ public class dataDriven {
 
         int sheets = workbook.getNumberOfSheets(); //to get count of sheets in excel doc
 
+
         for(int i =0; i<sheets; i++)
         {
-            if(workbook.getSheetName(i).equalsIgnoreCase("testcases")) {
+            if(workbook.getSheetName(i).equalsIgnoreCase("Testcases")) {
                 XSSFSheet sheet = workbook.getSheetAt(i);
+                String wrkSheetName = sheet.getSheetName();
+                System.out.println(wrkSheetName);
                 //get specific row
                 Iterator<Row> rows = sheet.iterator();
                 Row firstRow = rows.next();
@@ -29,15 +32,32 @@ public class dataDriven {
 
                 while(getCell.hasNext()) //checks if cell has next but won't move
                 {
+                    //System.out.println(colPosition);
                     Cell value = getCell.next(); //use .next() to move to cell
-                    if(value.getStringCellValue().equalsIgnoreCase("data3"));
+                    if(value.getStringCellValue().equalsIgnoreCase("testcases"))
                     {
                         //action retrieve data
                         columnIndex = colPosition;
+                        //colPosition++;
                     }
                     colPosition++;
                 }
                 System.out.println(columnIndex);
+
+                while (rows.hasNext()){
+                    Row r = rows.next();
+                    if(r.getCell(columnIndex).getStringCellValue().equalsIgnoreCase("login"))
+                    {
+                        Iterator<Cell> cv = r.cellIterator();
+                        while(cv.hasNext())
+                        {
+                            String cellText = cv.next().getStringCellValue();
+                            System.out.println(cellText);
+
+                        }
+                    }
+
+                }
             }
         }
     }
