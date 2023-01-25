@@ -5,16 +5,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class dataDriven {
     public static void main(String[] args) throws IOException {
 
+        ArrayList<String> ar = new ArrayList<>();
         FileInputStream fis = new FileInputStream("/Users/hunadimapulane/DemoDocs/ddtDemo.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fis); //accepts file input stream argument
-
         int sheets = workbook.getNumberOfSheets(); //to get count of sheets in excel doc
-
 
         for(int i =0; i<sheets; i++)
         {
@@ -51,9 +51,7 @@ public class dataDriven {
                         Iterator<Cell> cv = r.cellIterator();
                         while(cv.hasNext())
                         {
-                            String cellText = cv.next().getStringCellValue();
-                            System.out.println(cellText);
-
+                            ar.add(cv.next().getStringCellValue());
                         }
                     }
 
