@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class dataDriven {
-    public static void main(String[] args) throws IOException {
+
+
+    public ArrayList<String> getData(String testcaseName) throws IOException {
 
         ArrayList<String> ar = new ArrayList<>();
         FileInputStream fis = new FileInputStream("/Users/hunadimapulane/DemoDocs/ddtDemo.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fis); //accepts file input stream argument
         int sheets = workbook.getNumberOfSheets(); //to get count of sheets in excel doc
 
-        for(int i =0; i<sheets; i++)
-        {
-            if(workbook.getSheetName(i).equalsIgnoreCase("Testcases")) {
+        for (int i = 0; i < sheets; i++) {
+            if (workbook.getSheetName(i).equalsIgnoreCase("Testcases")) {
                 XSSFSheet sheet = workbook.getSheetAt(i);
                 String wrkSheetName = sheet.getSheetName();
                 System.out.println(wrkSheetName);
@@ -30,12 +31,11 @@ public class dataDriven {
                 int colPosition = 0;
                 int columnIndex = 0;
 
-                while(getCell.hasNext()) //checks if cell has next but won't move
+                while (getCell.hasNext()) //checks if cell has next but won't move
                 {
                     //System.out.println(colPosition);
                     Cell value = getCell.next(); //use .next() to move to cell
-                    if(value.getStringCellValue().equalsIgnoreCase("testcases"))
-                    {
+                    if (value.getStringCellValue().equalsIgnoreCase("testcases")) {
                         //action retrieve data
                         columnIndex = colPosition;
                         //colPosition++;
@@ -44,13 +44,11 @@ public class dataDriven {
                 }
                 System.out.println(columnIndex);
 
-                while (rows.hasNext()){
+                while (rows.hasNext()) {
                     Row r = rows.next();
-                    if(r.getCell(columnIndex).getStringCellValue().equalsIgnoreCase("login"))
-                    {
+                    if (r.getCell(columnIndex).getStringCellValue().equalsIgnoreCase(testcaseName)) {
                         Iterator<Cell> cv = r.cellIterator();
-                        while(cv.hasNext())
-                        {
+                        while (cv.hasNext()) {
                             ar.add(cv.next().getStringCellValue());
                         }
                     }
@@ -58,5 +56,8 @@ public class dataDriven {
                 }
             }
         }
+        return ar; }
+
+    public static void main(String[] args) {
     }
 }
