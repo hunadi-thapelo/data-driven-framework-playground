@@ -1,5 +1,7 @@
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -49,7 +51,17 @@ public class dataDriven {
                     if (r.getCell(columnIndex).getStringCellValue().equalsIgnoreCase(testcaseName)) {
                         Iterator<Cell> cv = r.cellIterator();
                         while (cv.hasNext()) {
-                            ar.add(cv.next().getStringCellValue());
+
+                            Cell cl = cv.next();
+                            if(cl.getCellType()== CellType.STRING){
+                                ar.add(cl.getStringCellValue());
+                            }else
+                            {
+                                ar.add(NumberToTextConverter.toText(cl.getNumericCellValue()));
+                                //ar.add(String.valueOf(cl.getNumericCellValue())); //does not work: converts numeric to double e.g 220.0
+                            }
+
+
                         }
                     }
 
