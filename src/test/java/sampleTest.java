@@ -5,7 +5,7 @@ public class sampleTest {
     public static void main(String[] args) throws IOException {
 
         dataDriven dd = new dataDriven();
-        ArrayList td = dd.getData("addprofile");
+        ArrayList td = dd.getData("payment");
 
         System.out.println(td.get(0));
         System.out.println(td.get(1));
